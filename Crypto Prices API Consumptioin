@@ -9,9 +9,11 @@ my_secret = os.environ['secret_code']
 # Coin Market Cap website the program is accessing for information consumption
 url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
 
-# Dictionary that accesses the cryptos by number, or the first one. In this case, the number one coin is Bitcoin
+# Dictionary that accesses the current top 10 crypto currentcies
 parameters = {
-  'id': '1'
+  'start':1,
+  'limit':10,
+  'convert':'USD'
 }
 
 # API Key dictionary using JSON headers
@@ -27,17 +29,18 @@ session.headers.update(headers)
 # Empty string to add coin name and price to
 coin_price = ''
 
-# Test that attempts to retrieve the coin name and current price in USD, otherwise throws an error
+# Test that attempts to retrieve the coins name and current prices in USD, otherwise throws an error
 try:
   response = session.get(url, params=parameters)
   data = json.loads(response.text)
-  coin_price += str(data['data']['1']['name']) + ' $'
-  coin_price += str(data['data']['1']['quote']['USD']['price'])
-  coin_price += '\n___________________________'
+  for i in range(0, 10):
+    coin_prices += str(data['data'][i]['name']) + ' $'
+    coin_prices += str(data['data'][i]['quote']['USD']['price'])
+    coin_prices += '\n---------------------------\n'
 except (ConnectionError, Timeout, TooManyRedirects) as e:
   print(e)
 
-# When called prints the name of coin at the '1' position and it's current USD price, which is updated every 60 seconds.
+# When called prints the name of coin in order as well as it's current USD price, which is updated every 60 seconds.
 print(coin_price)
 
 
