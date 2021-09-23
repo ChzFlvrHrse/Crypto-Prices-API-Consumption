@@ -37,7 +37,7 @@ try:
     coin_prices += str(data['data'][i]['name']) + ' $'
     coin_prices += str(data['data'][i]['quote']['USD']['price']) + '\n'
     coin_prices += '24 Hrs Percent Change: ' + str(data['data'][i]['quote']['USD']['percent_change_24h']) + '\n'
-    coin_prices += 'Current CMC Rank: ' + str(data['data'][i]['cmc_rank'])
+    coin_prices += 'CMC Rank: ' + str(data['data'][i]['cmc_rank'])
     coin_prices += '\n---------------------------\n'
 except (ConnectionError, Timeout, TooManyRedirects) as e:
   print(e)
