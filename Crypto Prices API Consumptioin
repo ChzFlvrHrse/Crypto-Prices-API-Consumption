@@ -29,7 +29,7 @@ session.headers.update(headers)
 # Empty string to add coin name and price to
 coin_price = ''
 
-# Test that attempts to retrieve the coins name, current USD price, 24 Hr percent, and it's current CMC Ranking, otherwise throws an error
+# Test that retrieves the coin name, current USD price, 24 Hr percent change, and it's current CMC Ranking, otherwise throws an error
 try:
   response = session.get(url, params=parameters)
   data = json.loads(response.text)
