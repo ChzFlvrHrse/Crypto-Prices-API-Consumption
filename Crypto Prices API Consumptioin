@@ -29,13 +29,14 @@ session.headers.update(headers)
 # Empty string to add coin name and price to
 coin_price = ''
 
-# Test that attempts to retrieve the coins name and current prices in USD, otherwise throws an error
+# Test that attempts to retrieve the coins name, current prices in USD and its percent change in the last 24 hours, otherwise throws an error
 try:
   response = session.get(url, params=parameters)
   data = json.loads(response.text)
   for i in range(0, 10):
     coin_prices += str(data['data'][i]['name']) + ' $'
-    coin_prices += str(data['data'][i]['quote']['USD']['price'])
+    coin_prices += str(data['data'][i]['quote']['USD']['price']) + '\n'
+    coin_prices += '24 Hrs Percent Change: ' + str(data['data'][i]['quote']['USD']['percent_change_24h'])
     coin_prices += '\n---------------------------\n'
 except (ConnectionError, Timeout, TooManyRedirects) as e:
   print(e)
