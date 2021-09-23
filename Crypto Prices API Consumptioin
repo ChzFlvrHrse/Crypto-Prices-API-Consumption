@@ -29,19 +29,21 @@ session.headers.update(headers)
 # Empty string to add coin name and price to
 coin_price = ''
 
-# Test that attempts to retrieve the coins name, current prices in USD and its percent change in the last 24 hours, otherwise throws an error
+# Test that attempts to retrieve the coins name, current USD price, 24 Hr percent, and it's current CMC Ranking, otherwise throws an error
 try:
   response = session.get(url, params=parameters)
   data = json.loads(response.text)
   for i in range(0, 10):
     coin_prices += str(data['data'][i]['name']) + ' $'
     coin_prices += str(data['data'][i]['quote']['USD']['price']) + '\n'
-    coin_prices += '24 Hrs Percent Change: ' + str(data['data'][i]['quote']['USD']['percent_change_24h'])
+    coin_prices += '24 Hrs Percent Change: ' + str(data['data'][i]['quote']['USD']['percent_change_24h']) + '\n'
+    coin_prices += 'Current CMC Rank: ' + str(data['data'][i]['cmc_rank'])
     coin_prices += '\n---------------------------\n'
 except (ConnectionError, Timeout, TooManyRedirects) as e:
   print(e)
 
-# When called prints the name of coin in order as well as it's current USD prices, which is updated every 60 seconds.
+# When called prints coin name, USD price, 24 Hr percent change and it's current CMC Ranking
+# Prices are updated every 60 seconds
 print(coin_price)
 
 
