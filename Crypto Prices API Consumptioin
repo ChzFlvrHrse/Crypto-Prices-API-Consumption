@@ -34,9 +34,8 @@ try:
   response = session.get(url, params=parameters)
   data = json.loads(response.text)
   for i in range(0, 10):
-    coin_prices += str(data['data'][i]['name']) + ' $'
-    coin_prices += str(data['data'][i]['quote']['USD']['price']) + '\n'
-    coin_prices += '24 Hrs Percent Change: ' + str(data['data'][i]['quote']['USD']['percent_change_24h']) + '\n'
+    coin_prices += str(data['data'][i]['name']) + ' $' + str(data['data'][i]['quote']['USD']['price']) + '\n'
+    coin_prices += '24 Hr Percent Change: ' + str(data['data'][i]['quote']['USD']['percent_change_24h']) + '\n'
     coin_prices += 'CMC Rank: ' + str(data['data'][i]['cmc_rank'])
     coin_prices += '\n---------------------------\n'
 except (ConnectionError, Timeout, TooManyRedirects) as e:
