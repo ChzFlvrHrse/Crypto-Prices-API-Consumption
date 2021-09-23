@@ -41,7 +41,7 @@ try:
 except (ConnectionError, Timeout, TooManyRedirects) as e:
   print(e)
 
-# When called prints the name of coin in order as well as it's current USD price, which is updated every 60 seconds.
+# When called prints the name of coin in order as well as it's current USD prices, which is updated every 60 seconds.
 print(coin_price)
 
 
