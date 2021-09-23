@@ -33,6 +33,7 @@ try:
   data = json.loads(response.text)
   coin_price += str(data['data']['1']['name']) + ' $'
   coin_price += str(data['data']['1']['quote']['USD']['price'])
+  coin_price += '\n___________________________'
 except (ConnectionError, Timeout, TooManyRedirects) as e:
   print(e)
 
