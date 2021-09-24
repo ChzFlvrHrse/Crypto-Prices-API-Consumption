@@ -9,7 +9,7 @@ my_secret = os.environ['secret_code']
 # Coin Market Cap website the program is accessing for information consumption
 url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
 
-# Dictionary that accesses the current top 10 crypto currentcies
+# Dictionary that accesses the current top 10 crypto currenties
 parameters = {
   'start':1,
   'limit':10,
@@ -26,10 +26,10 @@ headers = {
 session = Session()
 session.headers.update(headers)
 
-# Empty string to add coin name and price to
+# Empty string to add coin name, price, percent change, and CMC Ranking
 coin_price = ''
 
-# Test that retrieves the coin name, current USD price, 24 Hr percent change, and it's current CMC Ranking, otherwise throws an error
+# Test that retrieves the coin name, current USD price, 24 Hr percent change, and current CMC Ranking, otherwise, throws an error
 try:
   response = session.get(url, params=parameters)
   data = json.loads(response.text)
@@ -41,7 +41,7 @@ try:
 except (ConnectionError, Timeout, TooManyRedirects) as e:
   print(e)
 
-# When called prints coin name, USD price, 24 Hr percent change and it's current CMC Ranking
+# When called prints coin name, USD price, 24 Hr percent change and current CMC Ranking
 # Prices are updated every 60 seconds
 print(coin_price)
 
